@@ -119,7 +119,7 @@ function CalendarPanel() {
 }
 
 /* ── Bottom progress bar ── */
-function ProgressBar({ progress }: { progress: MotionValue<number> }) {
+// removed indicator
   const width = useTransform(progress, [0, 1], ["0%", "100%"])
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 h-[3px] bg-white/10">
@@ -198,8 +198,8 @@ export default function ScrollStory() {
         <div key={id} id={id} className="absolute left-0 h-px w-px" style={{ top }} />
       ))}
 
-      <ProgressBar progress={smoothProgress} />
-      <ChapterLabel progress={smoothProgress} />
+
+
 
       <div className="sticky top-0 h-screen overflow-hidden bg-[#f5f4ef]">
         {/* grid texture */}
