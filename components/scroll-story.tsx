@@ -118,37 +118,6 @@ function CalendarPanel() {
   )
 }
 
-/* ── Bottom progress bar ── */
-// removed indicator
-  const width = useTransform(progress, [0, 1], ["0%", "100%"])
-  return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 h-[3px] bg-white/10">
-      <motion.div style={{ width }} className="h-full bg-accent shadow-[0_0_12px_rgba(220,0,0,0.5)]" />
-    </div>
-  )
-}
-
-/* ── Chapter label ── */
-function ChapterLabel({ progress }: { progress: MotionValue<number> }) {
-  const [label, setLabel] = useState("HERO")
-  useEffect(() => {
-    const unsubscribe = progress.on("change", (v) => {
-      if (v < 0.18) setLabel("HERO")
-      else if (v < 0.45) setLabel("ON TRACK")
-      else if (v < 0.65) setLabel("SPEED")
-      else if (v < 0.88) setLabel("JOURNEY")
-      else setLabel("CALENDAR")
-    })
-    return unsubscribe
-  }, [progress])
-
-  return (
-    <div className="fixed bottom-4 right-6 z-50 font-[family-name:var(--font-oswald)] text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mix-blend-difference">
-      {label}
-    </div>
-  )
-}
-
 export default function ScrollStory() {
   const scrollYProgress = useMotionValue(0)
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 55, damping: 24, restDelta: 0.0005 })
@@ -197,9 +166,6 @@ export default function ScrollStory() {
       {anchors.map(([id, top]) => (
         <div key={id} id={id} className="absolute left-0 h-px w-px" style={{ top }} />
       ))}
-
-
-
 
       <div className="sticky top-0 h-screen overflow-hidden bg-[#f5f4ef]">
         {/* grid texture */}

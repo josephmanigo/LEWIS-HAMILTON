@@ -33,9 +33,9 @@ export default function Header() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
+        className="fixed top-0 left-0 right-0 z-50 pointer-events-none"
       >
-        <div className="mx-auto px-6 md:px-12 flex items-center justify-between h-16">
+        <div className="mx-auto px-6 md:px-12 flex items-center justify-between py-6 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
