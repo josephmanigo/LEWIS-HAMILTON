@@ -8,19 +8,9 @@ import { FlipLink } from "@/components/ui/flip-links"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY
-      setScrolled(currentScroll >= 40)
-    }
 
-    handleScroll()
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   useEffect(() => {
     if (menuOpen) {
@@ -43,8 +33,7 @@ export default function Header() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "backdrop-blur-md" : "bg-transparent"
-          }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
       >
         <div className="mx-auto px-6 md:px-12 flex items-center justify-between h-16">
           <motion.div
