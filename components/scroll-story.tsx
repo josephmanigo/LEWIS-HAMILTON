@@ -176,7 +176,7 @@ export default function ScrollStory() {
           style={{ opacity: openingOpacity, x: openingX, y: openingY, scale: openingScale, willChange: "transform, opacity" }}
           className="absolute inset-0"
         >
-          <div className="absolute left-[4vw] top-[9vh] z-0 font-[family-name:var(--font-oswald)] text-7xl font-black uppercase leading-[0.78] text-black tracking-tighter -skew-x-[15deg] md:max-xl:left-[5vw] md:max-xl:top-[10vh] md:max-xl:text-[6.4rem] xl:max-[1799px]:left-[5vw] xl:max-[1799px]:top-[10vh] xl:max-[1799px]:text-[9.2rem] min-[1800px]:text-[13rem] max-md:left-[6vw] max-md:top-[12vh] max-md:text-[3.75rem]">
+          <div className="absolute left-[4vw] top-[18vh] z-0 max-md:z-20 font-[family-name:var(--font-oswald)] text-7xl font-black uppercase leading-[0.78] text-black tracking-tighter -skew-x-[15deg] md:max-xl:left-[5vw] md:max-xl:top-[20vh] md:max-xl:text-[6.4rem] xl:max-[1799px]:left-[5vw] xl:max-[1799px]:top-[20vh] xl:max-[1799px]:text-[9.2rem] min-[1800px]:text-[13rem] max-md:left-[6vw] max-md:top-[24vh] max-md:text-[3.75rem]">
             <span className="block text-transparent"
               style={{
                 WebkitBackgroundClip: "text", backgroundClip: "text",
