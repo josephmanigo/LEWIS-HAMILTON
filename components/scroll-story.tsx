@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { motion, useMotionValue, useTransform, useSpring, type MotionValue } from "framer-motion"
+import { motion, useScroll, useTransform, useMotionValue, type MotionValue } from "framer-motion"
 
 const imageBase = "/images/generated/lewis-hamilton"
 
@@ -119,22 +119,7 @@ function CalendarPanel() {
 }
 
 export default function ScrollStory() {
-  const scrollYProgress = useMotionValue(0)
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 55, damping: 24, restDelta: 0.0005 })
-
-  useEffect(() => {
-    const updateProgress = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-      scrollYProgress.set(maxScroll > 0 ? window.scrollY / maxScroll : 0)
-    }
-    updateProgress()
-    window.addEventListener("scroll", updateProgress, { passive: true })
-    window.addEventListener("resize", updateProgress)
-    return () => {
-      window.removeEventListener("scroll", updateProgress)
-      window.removeEventListener("resize", updateProgress)
-    }
-  }, [scrollYProgress])
+  const { scrollYProgress: smoothProgress } = useScroll()
 
   /* ── OPENING panel — slides straight left through center ── */
   const openingOpacity = useTransform(smoothProgress, [0, 0.15, 0.22], [1, 1, 0])

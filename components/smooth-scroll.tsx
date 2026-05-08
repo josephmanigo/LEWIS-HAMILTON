@@ -13,16 +13,8 @@ export default function SmoothScroll({
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 2.0,
-      easing: (t) => {
-        // High-inertia cinematic easing — matches Leclerc-style momentum
-        return 1 - Math.pow(1 - t, 5)
-      },
+      lerp: 0.1,
       smoothWheel: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      wheelMultiplier: 0.7,
-      infinite: false,
     })
 
     lenisRef.current = lenis
