@@ -126,25 +126,30 @@ export default function ScrollStory() {
   const openingX = useTransform(smoothProgress, [0, 0.22], ["0vw", "-60vw"])
   const openingY = useTransform(smoothProgress, [0, 0.22], ["0vh", "0vh"])
   const openingScale = useTransform(smoothProgress, [0, 0.22], [1, 0.96])
+  const openingVis = useTransform(smoothProgress, (v: number) => v > 0.23 ? "hidden" : "visible")
 
   /* ── MAP panel — horizontal travel through center ── */
   const mapOpacity = useTransform(smoothProgress, [0.08, 0.17, 0.44, 0.51], [0, 1, 1, 0])
   const mapX = useTransform(smoothProgress, [0.10, 0.22, 0.36, 0.48], ["100vw", "0vw", "-80vw", "-160vw"])
   const mapY = useMotionValue(0)
+  const mapVis = useTransform(smoothProgress, (v: number) => (v < 0.07 || v > 0.52) ? "hidden" : "visible")
 
   /* ── ON-TRACK cinematic panel ── */
   const onTrackOpacity = useTransform(smoothProgress, [0.42, 0.49, 0.62, 0.69], [0, 1, 1, 0])
   const onTrackTextX = useTransform(smoothProgress, [0.43, 0.68], ["62vw", "-118vw"])
   const onTrackBladeX = useTransform(smoothProgress, [0.43, 0.57, 0.69], ["76vw", "0vw", "-64vw"])
+  const onTrackVis = useTransform(smoothProgress, (v: number) => (v < 0.41 || v > 0.70) ? "hidden" : "visible")
 
   /* ── JOURNEY panel — horizontal travel through center ── */
   const journeyOpacity = useTransform(smoothProgress, [0.62, 0.7, 0.90, 0.95], [0, 1, 1, 0])
   const journeyX = useTransform(smoothProgress, [0.64, 0.74, 0.88, 0.96], ["100vw", "0vw", "-120vw", "-200vw"])
   const journeyY = useMotionValue(0)
+  const journeyVis = useTransform(smoothProgress, (v: number) => (v < 0.61 || v > 0.96) ? "hidden" : "visible")
 
   /* ── FINAL panel ── */
   const finalOpacity = useTransform(smoothProgress, [0.91, 0.95, 1], [0, 1, 1])
   const finalTextX = useTransform(smoothProgress, [0.91, 1], ["48vw", "-72vw"])
+  const finalVis = useTransform(smoothProgress, (v: number) => v < 0.90 ? "hidden" : "visible")
 
   return (
     <section id="story" className="relative h-[640vh] bg-black">
@@ -158,7 +163,7 @@ export default function ScrollStory() {
 
         {/* ─── OPENING ─── */}
         <motion.div
-          style={{ opacity: openingOpacity, x: openingX, y: openingY, scale: openingScale, willChange: "transform, opacity" }}
+          style={{ visibility: openingVis, opacity: openingOpacity, x: openingX, y: openingY, scale: openingScale, willChange: "transform, opacity" }}
           className="absolute inset-0"
         >
           <div className="absolute left-[4vw] top-[18vh] z-0 max-md:z-20 font-[family-name:var(--font-oswald)] text-7xl font-black uppercase leading-[0.78] text-black tracking-tighter -skew-x-[15deg] md:max-xl:left-[5vw] md:max-xl:top-[20vh] md:max-xl:text-[6.4rem] xl:max-[1799px]:left-[5vw] xl:max-[1799px]:top-[20vh] xl:max-[1799px]:text-[9.2rem] min-[1800px]:text-[13rem] max-md:left-[6vw] max-md:top-[24vh] max-md:text-[3.75rem]">
@@ -198,7 +203,7 @@ export default function ScrollStory() {
 
         {/* ─── MAP ─── */}
         <motion.div
-          style={{ opacity: mapOpacity, x: mapX, y: mapY, willChange: "transform, opacity" }}
+          style={{ visibility: mapVis, opacity: mapOpacity, x: mapX, y: mapY, willChange: "transform, opacity" }}
           className="absolute left-0 top-0 h-screen w-[260vw]"
         >
           <NoteBlock kicker="On track" title="Race instinct"
@@ -223,7 +228,7 @@ export default function ScrollStory() {
         </motion.div>
 
         {/* ─── ON-TRACK ─── */}
-        <motion.div style={{ opacity: onTrackOpacity, willChange: "opacity" }}
+        <motion.div style={{ visibility: onTrackVis, opacity: onTrackOpacity, willChange: "opacity" }}
           className="absolute inset-0 overflow-hidden bg-black">
           <Image src={`${imageBase}/on-track-cockpit.png`} alt="Lewis Hamilton at speed"
             fill sizes="100vw" className="object-cover opacity-55" />
@@ -241,7 +246,7 @@ export default function ScrollStory() {
 
         {/* ─── JOURNEY ─── */}
         <motion.div
-          style={{ opacity: journeyOpacity, x: journeyX, y: journeyY, willChange: "transform, opacity" }}
+          style={{ visibility: journeyVis, opacity: journeyOpacity, x: journeyX, y: journeyY, willChange: "transform, opacity" }}
           className="absolute left-0 top-0 h-screen w-[260vw]"
         >
           <NoteBlock kicker="Off track" title="Beyond race day"
@@ -266,7 +271,7 @@ export default function ScrollStory() {
         </motion.div>
 
         {/* ─── FINAL ─── */}
-        <motion.div style={{ opacity: finalOpacity, willChange: "opacity" }}
+        <motion.div style={{ visibility: finalVis, opacity: finalOpacity, willChange: "opacity" }}
           className="absolute inset-0 overflow-hidden bg-black">
           <Image src={`${imageBase}/podium-celebration.png`} alt="Lewis Hamilton podium celebration"
             fill sizes="100vw" className="object-cover opacity-45" />
